@@ -3,10 +3,10 @@ Ceci est un projet de mise en place d'une application d'aide à l'amélioration 
 
 ## Notre equipe
 | Prenom Nom | Role | GitHub Username | E-mail GitHub |
-|Ibrahima FAYE| Master Prompt Engineer | |thekipstyle@gmail.com|
-|Abdou Aziz Mbaye| Chef de Produit (PM) | | |
-|Kalidou Baldé| Responsable Impact | | |
-|Makhoudia Sène| Dev UI (No-Code) | Maksen | |
+|Ibrahima FAYE| Master Prompt Engineer | kipstyle |thekipstyle@gmail.com|
+|Abdou Aziz Mbaye| Chef de Produit (PM) | Azizmbaye221 | abdouaziz.mbaye1990@gmail.com|
+|Kalidou Baldé| Responsable Impact | KalidouBaLde| khalidoubalde96@gmail.com|
+|Makhoudia Sène| Dev UI (No-Code) | Maksen | Makhoubryant24@gmail.com|
 
 ## Notre defi
 - **Secteur :** Mobilité urbaine Dakar
