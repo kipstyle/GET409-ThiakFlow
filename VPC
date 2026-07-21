@@ -1,0 +1,45 @@
+# Value Proposition Canvas — ThiakFlow
+
+## 👤 Profil Client — Moussa (Livreur Tiak-Tiak)
+
+### 🔧 Jobs To Be Done
+- Livrer des colis à travers Dakar (axes VDN, Colobane, Médina, Almadies).
+- Gérer les commandes de livraison éparpillées reçues par notes vocales WhatsApp.
+- Maximiser ses gains quotidiens et rentabiliser chaque kilomètre parcouru.
+- Maintenir sa moto en bon état et gérer ses coûts de carburant.
+
+### 😣 Pains (Frustrations & Obstacles)
+- Coût élevé du carburant dû aux trajets à vide entre deux livraisons éloignées.
+- Embouteillages imprévisibles sur la VDN et pertes de temps aux heures de pointe.
+- Stress et pression générés par les clients impatients sur WhatsApp.
+- Calcul mental épuisant et improvisé pour essayer d'optimiser son itinéraire.
+
+### 🌟 Gains (Aspirations & Succès)
+- Groupement automatique des colis par zone géographique avant le départ.
+- Augmentation de 50% à 100% de la marge nette quotidienne.
+- Gain de temps sur les trajets grâce à des feuilles de route claires.
+- Réduction du stress au volant et de la charge cognitive liée à la lecture des vocaux.
+
+---
+
+## 💡 Proposition de Valeur — ThiakFlow Agent
+
+### 📦 Produits & Services (Notre MVP)
+- Un **Agent IA Dispatcher (Dify)** accessible par WhatsApp / SMS.
+- Extraction automatique des adresses et contraintes à partir de notes vocales ou SMS de clients.
+- Algorithme de regroupement des colis par secteurs géographiques (ex: Zone Almadies, Zone Médina) avec génération d'une feuille de route optimisée.
+
+### 💊 Pain Relievers
+- **Coût carburant élevé** ➔ L'Agent regroupe les colis de la même zone, éliminant les allers-retours à vide.
+- **Embouteillages & stress** ➔ L'Agent propose le meilleur ordre de passage en évitant les axes saturés.
+- **Pression WhatsApp** ➔ L'Agent centralise et formate les commandes au lieu de forcer Moussa à réécouter 20 vocaux.
+- **Gestion mentale d'itinéraire** ➔ L'Agent génère une liste d'étapes ultra-simple (1, 2, 3) directement lisible.
+
+### 🎁 Gain Creators
+- **Groupement par zone** ➔ Moussa charge 3 à 4 colis pour un même secteur avant de démarrer.
+- **Augmentation des revenus** ➔ Plus de livraisons effectuées par litre de carburant consommé.
+- **Itinéraires clairs** ➔ Réception d'un message synthétique structuré après chaque vocal client transféré.
+
+### ✅ FIT Check
+- **Diagnostic :** Tous les Pains de Moussa ont un Pain Reliever en face, et chaque Gain a un Gain Creator associé. Aucune fonctionnalité superflue (effet "gadget") n'a été ajoutée. **FIT Validé !**
+
