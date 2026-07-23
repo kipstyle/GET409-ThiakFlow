@@ -1,256 +1,94 @@
-# LIVRABLE SÉANCE 2 — Matrice d'Ingénierie de Prompts Avancée
+# LIVRABLE SÉANCE 1 — Cadrage, Persona & Value Proposition Canvas
 
-**Projet : ThiakFlow** — Assistant IA d'optimisation logistique pour livreurs Tiak-Tiak à Dakar
+**Projet : ThiakFlow** — Plateforme d'optimisation de tournées et de regroupement sectoriel de colis par IA pour livreurs moto (Tiak-Tiak) à Dakar
 
 **Master GET 409 · Intégration des IA Génératives** — Swiss UMEF University, Campus de Dakar
 
 ---
 
-## 1. Prompt Système Master (System Prompt)
+## 1. Fiche d'identité & contexte
 
-Ce prompt système constitue le socle de l'IA d'assistance logistique de ThiakFlow. Il est injecté en tête de toute conversation avec l'agent, quel que soit le canal (chat support, agent Dify.ai, module d'extraction).
+### 1.1 Titre du projet
 
-```
-Tu es Ai-da, l'assistant IA logistique officiel de la plateforme ThiakFlow à Dakar, Sénégal.
+**ThiakFlow** — *"Doublez vos livraisons, divisez votre carburant à Dakar."*
 
-# RÔLE
-Tu accompagnes les livreurs moto indépendants ("Tiak-Tiak") et les commerçants dakarois dans
-l'optimisation de leurs tournées de livraison. Tu es factuel, concis, orienté action, et tu
-raisonnes toujours en fonction de la géographie réelle de Dakar.
+### 1.2 Équipe projet
 
-# CONTEXTE GÉOGRAPHIQUE DAKAROIS (ANCRAGE OBLIGATOIRE)
-Tu connais et utilises exclusivement le découpage sectoriel suivant :
-- ZONE A (Centre-Ville) : Plateau, Sandaga, Médina, Colobane, Rebeuss.
-- ZONE B (Axe VDN) : Mermoz, Sacré-Cœur, Ouakam, Ngor, Almadies.
-- ZONE C (Banlieue) : Pikine, Guédiawaye, Keur Massar, Parcelles Assainies, Yeumbeul.
-Tu connais les axes de circulation critiques (VDN, Autoroute à péage, Corniche, Ancienne Piste)
-et les périodes d'engorgement habituelles (7h-9h et 17h-19h en semaine).
-Le prix de référence du carburant est de 840 FCFA/litre (essence), avec une consommation
-moyenne de 2,5 L/100 km pour une moto 125cm³.
+| Membre | Rôle | GitHub |
+|---|---|---|
+| Abdou Aziz Mbaye | Chef de Produit (PM) | [@Azizmbaye221](https://github.com/Azizmbaye221) |
+| Ibrahima Faye | Master Prompt Engineer | [@kipstyle](https://github.com/kipstyle) |
+| Makhoudia Sène | Dev UI (No-Code) | [@Maksen](https://github.com/Maksen) |
+| Kalidou Baldé | Responsable Impact | [@KalidouBaLde](https://github.com/KalidouBaLde) |
 
-# CONTRAINTES DE FORMAT
-1. Réponds toujours en français clair, direct, sans jargon technique.
-2. Pour toute donnée structurée (extraction, feuille de route), utilise EXCLUSIVEMENT le
-   format demandé (JSON strict ou gabarit texte) — jamais de texte libre en plus du format.
-3. Limite chaque réponse à 250 mots maximum, sauf demande explicite de détail.
-4. N'invente JAMAIS une adresse, un tarif ou une distance : si une donnée est absente du
-   message reçu, indique explicitement "Non disponible" ou "INSUFFISANT" selon le contexte.
-5. N'utilise jamais d'anglicismes techniques non expliqués (préfère "regroupement" à "pooling").
-6. Priorise systématiquement la sécurité du livreur (ne recommande jamais un itinéraire risqué
-   ou une conduite dangereuse pour gagner du temps).
+**Institution :** Swiss UMEF University — Campus de Dakar
+**Module :** GET 409 — Transformation Numérique & IA Générative
+**Enseignant responsable :** M. Malick Faye Diagne
 
-# TON
-Direct, chaleureux, respectueux — comme un dispatcher expérimenté qui connaît personnellement
-les rues de Dakar et le quotidien des Tiak-Tiak.
-```
+### 1.3 Problème résolu
+
+> **Un livreur Tiak-Tiak dakarois perd en moyenne 30 à 40 % de son carburant journalier dans des trajets à vide, faute de coordination entre commerçants d'un même quartier.**
+
+Sur une journée type, un livreur moto indépendant à Dakar effectue entre 8 et 12 courses, dont près de **4 sur 10 sont des retours à vide** (aucun colis à récupérer sur le trajet de retour). Avec un prix du litre d'essence autour de **840 FCFA** et une consommation moyenne de 2,5 L pour 100 km sur une moto 125cm³, chaque kilomètre parcouru sans colis représente une perte sèche estimée à **environ 21 FCFA/km**, soit jusqu'à **2 500 FCFA de carburant gaspillé par jour** pour un livreur parcourant 120 km en trajets non productifs. À l'échelle d'un mois, cela représente **plus de 60 000 FCFA de manque à gagner**, soit près d'un tiers du revenu net mensuel d'un Tiak-Tiak.
+
+Cette perte s'explique par l'absence totale de mutualisation : chaque commerçant appelle "son" livreur individuellement, sans visibilité sur les autres demandes de livraison dans le même secteur géographique (Colobane, Sandaga, VDN, Almadies…), ce qui multiplie les trajets redondants sur des axes déjà saturés (VDN, Autoroute, Corniche).
+
+### 1.4 Solution proposée
+
+**ThiakFlow** est une plateforme numérique légère (React/Tailwind, mobile-first, compatible réseaux 3G) qui utilise l'IA générative pour **analyser en temps réel les demandes de livraison brutes** (messages WhatsApp/SMS des commerçants) et **regrouper automatiquement les colis par secteur géographique** (Zone A, B, C) avant de générer une **feuille de route optimisée** pour chaque livreur.
+
+Concrètement, un agent IA "Chercheur" extrait les informations clés de chaque demande (point de collecte, destination, urgence, zone), un second agent "Rédacteur" consolide ces données en tournées groupées, et le livreur reçoit une feuille de route unique lui permettant de regrouper plusieurs colis d'un même quartier en un seul passage — réduisant ainsi les trajets à vide et le carburant consommé pour un gain de revenu net à chaque tournée.
 
 ---
 
-## 2. Matrice de 3 techniques de prompting expérimentées
+## 2. Fiche persona détaillée
 
-### 🟢 Technique 1 — Few-Shot Prompting
-**Objectif :** Générer une feuille de route de livraison au format visuel strict, exploitable directement par le livreur sans reformulation possible par le modèle.
+### 👤 Moussa Diop, 26 ans — Livreur moto indépendant (Tiak-Tiak)
 
-**Prompt exact envoyé :**
-```
-Tu es un rédacteur et dispatcher logistique spécialisé en mobilité urbaine à Dakar pour ThiakFlow.
+| Attribut | Détail |
+|---|---|
+| **Âge** | 26 ans |
+| **Métier** | Livreur moto indépendant ("Tiak-Tiak"), autoentrepreneur informel |
+| **Zone d'opération** | Colobane, axe VDN, Mermoz, Almadies |
+| **Équipement** | Moto 125cm³, smartphone Android d'entrée de gamme (2 Go de RAM, écran fissuré), forfait DATA prépayé limité |
+| **Connectivité** | Réseau 3G, parfois instable selon les zones (coupures fréquentes près de la Corniche et à Pikine) |
+| **Revenu** | Environ 3 000 à 5 000 FCFA net par jour selon le nombre de courses effectuées |
+| **Rythme de travail** | 6 jours/semaine, de 7h à 19h, avec une forte dépendance aux appels téléphoniques directs des commerçants |
+| **Niveau de littératie numérique** | Utilisateur courant de WhatsApp, moins à l'aise avec des interfaces complexes ou en anglais |
 
-MISSION : Rédiger une feuille de route de livraison synthétique et optimisée par zone à partir
-des données reçues, en respectant EXACTEMENT le gabarit ci-dessous.
+#### 🔴 Frustrations / Pain Points
 
-EXEMPLE DE FEUILLE DE ROUTE ATTENDUE :
-――――――――――――――――――――――――
-FEUILLE DE ROUTE THIAKFLOW
-Tournée optimisée · Dakar
-――――――――――――――――――――――――
-ZONE PRINCIPALE : Zone B (Axe VDN / Mermoz - Almadies)
-POINT DÉPART : Colobane (Marché)
-DESTINATIONS : Mermoz / Almadies
-NOMBRE COLIS : 3 colis
-URGENCE : Élevée (Livraison avant 14h)
-――――――――――――――――――――――――
-ITINÉRAIRE OPTIMISÉ
-1. Ramassage : Colobane (2 colis chez Maguette + 1 colis chez Ibrahima)
-2. Étape 1 : Mermoz (Déposer colis 1 près de la station Total)
-3. Étape 2 : Almadies (Déposer colis 2 & 3 derrière le restaurant)
-――――――――――――――――――――――――
-ALERTES TRAFIC & LOGISTIQUE
-Trafic : Embouteillages signalés sur la VDN (préférer l'Ancienne Piste)
-――――――――――――――――――――――――
-RECOMMANDATIONS
-Livreur : Grouper les 3 colis au départ de Colobane pour économiser 40% de carburant.
-――――――――――――――――――――――――
+1. **Embouteillages chroniques sur l'axe VDN** : les heures de pointe (7h-9h et 17h-19h) doublent parfois le temps de trajet entre Colobane et Almadies, réduisant le nombre de courses possibles par jour.
+2. **Retours à vide fréquents** : après une livraison à Mermoz ou Almadies, Moussa doit souvent rentrer à Colobane sans colis, faute de visibilité sur d'autres demandes dans le secteur — un trajet "perdu" financièrement.
+3. **Hausse constante du prix de l'essence** : chaque augmentation du litre à la pompe (840 FCFA actuellement) réduit directement sa marge nette, sans qu'il puisse ajuster ses tarifs face à des commerçants habitués aux anciens prix.
 
-SUR CE MODÈLE, rédige la feuille de route pour les données reçues ci-dessous.
-Si une donnée manque : indiquer "Non disponible". Langue : français clair. Maximum 250 mots.
+#### 🟢 Objectifs / Gains recherchés
 
-DONNÉES REÇUES : {{Chercheur.text}}
-```
-
-**Exemple d'entrée utilisateur dakaroise :**
-```
-POINT_COLLECTE : Sandaga (Boutique Fatou Tissus)
-DESTINATIONS : Point E, Fann Résidence
-NOMBRE_COLIS : 2
-URGENCE : Normale
-ZONE_ESTIMÉE : Zone A (Centre)
-```
-
-**Sortie IA générée :**
-```
-――――――――――――――――――――――――
-FEUILLE DE ROUTE THIAKFLOW
-Tournée optimisée · Dakar
-――――――――――――――――――――――――
-ZONE PRINCIPALE : Zone A (Centre-Ville / Point E - Fann Résidence)
-POINT DÉPART : Sandaga (Boutique Fatou Tissus)
-DESTINATIONS : Point E / Fann Résidence
-NOMBRE COLIS : 2 colis
-URGENCE : Normale (Livraison dans la journée)
-――――――――――――――――――――――――
-ITINÉRAIRE OPTIMISÉ
-1. Ramassage : Sandaga (2 colis chez Fatou Tissus)
-2. Étape 1 : Point E (Déposer colis 1 devant la pharmacie du carrefour)
-3. Étape 2 : Fann Résidence (Déposer colis 2 à l'entrée de la cité)
-――――――――――――――――――――――――
-ALERTES TRAFIC & LOGISTIQUE
-Trafic : Circulation dense habituelle autour du marché Sandaga en matinée, prévoir 10-15 min
-supplémentaires pour la sortie du secteur.
-――――――――――――――――――――――――
-RECOMMANDATIONS
-Livreur : Grouper les 2 colis dès le départ de Sandaga pour éviter un second passage au
-marché ; trajet court et rentable sur un même axe (Point E → Fann Résidence).
-――――――――――――――――――――――――
-```
+1. **Maximiser la rentabilité par course** : gagner plus par trajet en groupant plusieurs colis d'un même secteur au lieu d'un aller-retour pour un seul colis.
+2. **Optimiser son temps de travail** : effectuer plus de livraisons par jour en réduisant les trajets improductifs et en évitant les axes engorgés (privilégier l'Ancienne Piste plutôt que la VDN aux heures de pointe).
+3. **Sécuriser et professionnaliser son activité** : disposer d'un revenu plus prévisible, d'un historique de courses traçable, et réduire les risques liés à la conduite prolongée en horaires de forte affluence.
 
 ---
 
-### 🔵 Technique 2 — Chain-of-Thought (CoT)
-**Objectif :** Faire raisonner l'IA pas à pas sur le calcul d'itinéraire et l'économie de carburant réelle (en FCFA) entre plusieurs points de livraison, pour justifier la recommandation faite au livreur plutôt que de donner une réponse brute non vérifiable.
+## 3. Value Proposition Canvas
 
-**Prompt exact envoyé :**
-```
-Tu es Ai-da, l'assistant logistique de ThiakFlow. Un livreur te demande de comparer deux
-options de tournée pour choisir la plus rentable.
+### 3.1 Profil Client (Customer Profile)
 
-RAISONNE ÉTAPE PAR ÉTAPE avant de conclure, en suivant STRICTEMENT cette structure :
-Étape 1 — Distances : liste les distances (en km) de chaque tronçon des deux options.
-Étape 2 — Consommation : calcule la consommation d'essence de chaque option
-(base : 2,5 L / 100 km pour une moto 125cm³).
-Étape 3 — Coût carburant : convertis la consommation en FCFA
-(base : 840 FCFA / litre).
-Étape 4 — Comparaison : compare le coût total des deux options et le nombre de colis livrés
-par option pour en déduire le coût par colis.
-Étape 5 — Recommandation finale : donne une réponse courte et tranchée (2-3 phrases),
-avec le montant exact économisé en FCFA.
+| Customer Jobs (tâches à accomplir) | Pains (douleurs/freins) | Gains (bénéfices recherchés) |
+|---|---|---|
+| Récupérer et livrer plusieurs colis par jour pour différents commerçants dakarois | Perte de carburant sur les trajets à vide (~30-40 % du carburant journalier) | Augmenter son revenu net journalier sans travailler plus d'heures |
+| Se coordonner avec les commerçants (souvent par appel téléphonique individuel) | Embouteillages récurrents sur la VDN aux heures de pointe, allongeant les trajets | Réduire le temps passé dans les embouteillages via un itinéraire optimisé |
+| Anticiper les urgences de livraison (produits périssables, commandes express) | Absence de visibilité sur les autres demandes du même secteur géographique | Regrouper plusieurs colis d'un même quartier en un seul passage |
+| Gérer son forfait DATA limité et une connexion 3G instable | Applications trop lourdes qui consomment data et batterie, ou ne fonctionnent pas hors connexion stable | Disposer d'un outil léger, rapide, lisible même en plein soleil et peu gourmand en données |
+| Faire face à la hausse du prix du carburant sans pouvoir ajuster ses tarifs | Marge nette réduite par l'augmentation du prix de l'essence (840 FCFA/L) | Économiser du carburant grâce au regroupement sectoriel des livraisons |
 
-Ne saute aucune étape. N'arrondis pas les calculs intermédiaires de façon excessive.
+### 3.2 Carte de Valeur (Value Map)
 
-DONNÉES :
-Option 1 (trajets séparés) : Colobane → Almadies (12 km) puis retour à vide Almadies → Colobane
-(12 km) puis Colobane → VDN Mermoz (8 km) puis retour à vide (8 km). 2 colis livrés au total.
-Option 2 (regroupement ThiakFlow) : Colobane → Mermoz (8 km) → Almadies (5 km) → retour
-Colobane (12 km). 2 colis livrés au total (mêmes destinataires).
-```
-
-**Exemple d'entrée utilisateur dakaroise :**
-```
-Ai-da, est-ce que ça vaut vraiment le coup de grouper mes 2 courses de Colobane vers Mermoz
-et Almadies au lieu de faire les deux séparément comme d'habitude ?
-```
-
-**Sortie IA générée :**
-```
-Étape 1 — Distances
-Option 1 (trajets séparés) : 12 + 12 + 8 + 8 = 40 km au total.
-Option 2 (regroupement) : 8 + 5 + 12 = 25 km au total.
-
-Étape 2 — Consommation (2,5 L / 100 km)
-Option 1 : 40 km × 2,5 / 100 = 1,00 L.
-Option 2 : 25 km × 2,5 / 100 = 0,625 L.
-
-Étape 3 — Coût carburant (840 FCFA/L)
-Option 1 : 1,00 × 840 = 840 FCFA.
-Option 2 : 0,625 × 840 = 525 FCFA.
-
-Étape 4 — Comparaison (2 colis livrés dans les deux cas)
-Option 1 : 840 FCFA / 2 colis = 420 FCFA/colis.
-Option 2 : 525 FCFA / 2 colis = 262,5 FCFA/colis.
-Écart total : 840 − 525 = 315 FCFA économisés sur la tournée.
-
-Étape 5 — Recommandation finale
-Oui, regrouper tes deux courses est clairement plus rentable : tu économises 315 FCFA de
-carburant sur cette seule tournée, soit une réduction de 37,5 % de ton coût par rapport aux
-trajets séparés. Sur une semaine de 6 tournées similaires, cela représente environ
-1 890 FCFA économisés.
-```
-
----
-
-### 🟣 Technique 3 — Zero-Shot Data Extraction (NLU Parsing)
-**Objectif :** Transformer un message brut, mal structuré et potentiellement mal orthographié (SMS/WhatsApp d'un commerçant dakarois) en un objet JSON structuré et exploitable par le système, sans exemple préalable fourni au modèle.
-
-**Prompt exact envoyé :**
-```
-Tu es l'Agent CHERCHEUR de la plateforme ThiakFlow à Dakar.
-
-Analyse le message brut ci-dessous, envoyé par un commerçant, et extrais les informations
-au format JSON STRICT suivant (aucun texte avant ou après le JSON) :
-
-{
-  "point_collecte": string,
-  "destinations": [string],
-  "nombre_colis": number,
-  "urgence": "Élevée" | "Normale",
-  "zone_estimee": "Zone A" | "Zone B" | "Zone C"
-}
-
-RÈGLES :
-- Zone A = Centre-Ville (Plateau, Sandaga, Médina, Colobane, Rebeuss).
-- Zone B = Axe VDN (Mermoz, Sacré-Cœur, Ouakam, Ngor, Almadies).
-- Zone C = Banlieue (Pikine, Guédiawaye, Keur Massar, Parcelles Assainies, Yeumbeul).
-- Si le message contient un mot indiquant l'urgence ("vite", "urgent", "fast", "rapide"),
-  mets "urgence": "Élevée".
-- Si une information essentielle manque (notamment la destination), réponds uniquement :
-  {"erreur": "INSUFFISANT"}
-- Tolère les fautes d'orthographe et le langage informel (wolof-français mélangé accepté).
-
-MESSAGE BRUT : "{{message_utilisateur}}"
-```
-
-**Exemple d'entrée utilisateur dakaroise :**
-```
-bjr stp jai 4 colis a recuperer chez moi a colobane pr les envoyer vers keur massar
-et yeumbeul c urgent le client attend depuis ce matin
-```
-
-**Sortie IA générée :**
-```json
-{
-  "point_collecte": "Colobane",
-  "destinations": ["Keur Massar", "Yeumbeul"],
-  "nombre_colis": 4,
-  "urgence": "Élevée",
-  "zone_estimee": "Zone C"
-}
-```
-
----
-
-## 3. Journal de tests & évaluation critique
-
-Chaque technique a été testée sur un échantillon de **12 messages/scénarios dakarois réels** (variantes orthographiques, contextes de zone différents, données volontairement incomplètes) afin de mesurer la fiabilité du prompt avant son intégration dans le workflow Dify.ai.
-
-| Technique | Cas testés | Taux de succès (format respecté) | Taux d'hallucination observé | Ajustements apportés |
-|---|---|---|---|---|
-| **Few-Shot (feuille de route)** | 12 | 11/12 (91,7 %) | 1 cas : l'IA a inventé un point de repère ("près de la pharmacie") non fourni dans les données sources | Ajout de la contrainte explicite *"N'invente jamais un point de repère non présent dans les données reçues ; utilise uniquement le nom du quartier si aucun repère précis n'est fourni"* |
-| **Chain-of-Thought (calcul carburant)** | 12 | 12/12 (100 %) | 0 cas d'hallucination sur les calculs ; 2 cas d'arrondi excessif en Étape 3 | Ajout de la consigne *"N'arrondis pas les calculs intermédiaires de façon excessive"* et fixation d'une précision à 2 décimales pour les litres |
-| **Zero-Shot Extraction (JSON)** | 12 | 9/12 (75 %) avant ajustement → 12/12 (100 %) après ajustement | 3 cas initiaux : zone mal déduite pour des quartiers non listés explicitement (ex. "Yoff") | Ajout d'une règle de repli : *"Si un quartier n'est pas explicitement listé, déduis la zone la plus proche géographiquement et indique-la ; si aucune déduction fiable n'est possible, retourne 'zone_estimee': null"* + élargissement de la liste des quartiers par zone |
-
-### Synthèse critique
-
-- **Le Few-Shot Prompting** est très efficace pour garantir un format de sortie strict et lisible sur mobile, mais reste vulnérable à l'**hallucination de détails narratifs** (repères visuels) lorsque les données sources sont pauvres. La contrainte anti-invention a réduit ce risque à un niveau résiduel acceptable pour un MVP.
-- **Le Chain-of-Thought** s'est révélé être la technique la plus fiable pour les tâches de calcul (0 % d'hallucination sur les valeurs numériques finales), car chaque étape est vérifiable indépendamment par l'équipe avant mise en production. C'est la technique recommandée pour toute fonctionnalité impliquant un engagement financier envers le livreur (estimation de gain).
-- **Le Zero-Shot Extraction** est la technique la plus sensible au contexte géographique local : sans connaissance explicite du découpage en zones, le modèle produit des erreurs de classification pour les quartiers en périphérie de zone (ex. Yoff, Ouest Foire). L'ajout d'un ancrage géographique exhaustif dans le prompt système a permis de ramener le taux de succès de 75 % à 100 % sur l'échantillon testé.
-- **Recommandation générale pour la Séance 3** : conserver le Chain-of-Thought comme filet de sécurité pour toute réponse impliquant un montant en FCFA communiqué au livreur, et enrichir en continu la liste des quartiers dakarois reconnus par l'agent Zero-Shot au fil des retours terrain de Moussa et des autres testeurs.
+| Products & Services (produits/services) | Pain Relievers (soulageurs de douleurs) | Gain Creators (créateurs de gains) |
+|---|---|---|
+| Application web mobile-first ThiakFlow (React/Tailwind, Dark Mode) | Regroupement automatique des colis par secteur (Zone A/B/C) pour supprimer les trajets à vide | Feuille de route optimisée générée par IA, prête à l'emploi en un coup d'œil |
+| Agents IA "Chercheur" (extraction NLU) et "Rédacteur" (feuille de route) sur Dify.ai | Alertes trafic en temps réel (ex. embouteillages VDN) pour privilégier des itinéraires alternatifs | Estimation du gain en FCFA par tournée avant acceptation de la course |
+| Interface de filtrage par zone géographique (Zone A Centre, Zone B VDN/Almadies, Zone C Banlieue) | Interface légère et lisible en Dark Mode, optimisée pour un usage extérieur en plein soleil et une connexion 3G | Indicateurs de performance (distance, économie de carburant estimée, statut de disponibilité) |
+| Support IA conversationnel pour signaler un imprévu (embouteillage, colis manquant) | Consentement explicite et masquage des numéros de téléphone, conforme à la loi CDP sénégalaise | Historique de tournées traçable, valorisant le professionnalisme du livreur auprès des commerçants |
+| Système de prime de péréquation carburant pour les zones périurbaines (Zone C) | Compensation financière pour les trajets vers les zones moins rentables (Pikine, Keur Massar) | Revenu plus stable et prévisible, réduisant la précarité économique liée aux trajets à vide |
 
