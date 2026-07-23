@@ -64,10 +64,18 @@ Le MVP est entièrement déployé en ligne et utilisable sans installation préa
 
 ## 📸 6. Aperçu de l'Application (Captures d'Écran)
 
-![Aperçu du MVP ThiakFlow](https://via.placeholder.com/1200x630/0B0B14/06B6D4?text=ThiakFlow+MVP+V1+-+Dashboard+%26+Split+Map+Dakar)
 
 *Figure 1 : Interface Mobile & Desktop de ThiakFlow — Style Urban Tech / Night Ride.*[cite: 1]
 
 ---
+
+## 7. Livrables 
+* 📁 [Séance 1 — Cadrage & Persona](./docs/S1_Cadrage_ThiakFlow.md)
+* 📁 [Séance 2 — Ingénierie de Prompts Avancée](./docs/S2_Prompt_Engineering_ThiakFlow.md)
+* 📁 [Séance 3 — Agentique Dify](https://dify.ai/...)
+* 📁 [Séance 4 — MVP Web Live](https://thiakflow-dakar-pro.lovable.app)
+
+
+
 
 > **Note d'Évaluation S4 :** Ce dépôt est public et conforme aux exigences du cours GET 409 dispensé par M. Malick Faye Diagne à la Swiss UMEF University (Campus de Dakar)[cite: 2, 3, 4].
