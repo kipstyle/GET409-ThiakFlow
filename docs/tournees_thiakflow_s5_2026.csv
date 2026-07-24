@@ -1,0 +1,11 @@
+Reference,Zone,Point_Depart,Destinations,Nombre_Colis,Gain_Estime_FCFA,Statut,Urgence,Semaine,Source
+TF-D101,Zone B (Axe VDN),Marché Colobane,Mermoz et Almadies,3,1800,Disponible,Élevée,S23-2026,ThiakFlow
+TF-D102,Zone A (Centre),Marché Sandaga,Médina et Rebeuss,2,800,Disponible,Normale,S23-2026,ThiakFlow
+TF-D103,Zone C (Banlieue),Marché HLM,Pikine et Guédiawaye,4,2000,Indisponible,Normale,S23-2026,ThiakFlow
+TF-D104,Zone A (Centre),Port de Dakar,Point E,1,500,Disponible,Normale,S23-2026,ThiakFlow
+TF-D105,Zone B (Axe VDN),Ouest Foire,Ngor et Les Almadies,2,1200,Disponible,Élevée,S23-2026,ThiakFlow
+TF-D106,Zone C (Banlieue),Parcelles Assainies,Keur Massar,3,1800,Disponible,Normale,S23-2026,ThiakFlow
+TF-D107,Zone A (Centre),Plateau,Fann Résidence et Point E,2,650,Disponible,Normale,S23-2026,ThiakFlow
+TF-D108,Zone B (Axe VDN),Sacré-Cœur,Ngor,1,900,Disponible,Élevée,S23-2026,ThiakFlow
+TF-D109,Zone C (Banlieue),Guédiawaye,Yeumbeul,2,1500,Disponible,Normale,S23-2026,ThiakFlow
+TF-D110,Zone A (Centre),Médina,Colobane et Rebeuss,3,700,Indisponible,Normale,S23-2026,ThiakFlow
